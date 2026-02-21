@@ -1,6 +1,5 @@
 <section class="hero" aria-label="Hero">
   <div class="hero__background" aria-hidden="true">
-    <div class="hero__glow"></div>
     <div class="hero__gradient"></div>
     <div class="hero__noise"></div>
     <div class="hero__particles">
@@ -8,6 +7,13 @@
     </div>
   </div>
 
+  <header class="hero__header">
+    <a href="/" class="hero__logo" aria-label="The Narrative Circuit - Home">
+      <img src="src\assets\logo.jpg" alt="The Narrative Circuit" class="hero__logo-img">
+      <span class="hero__logo-text">{{ brandName }}</span>
+    </a>
+  </header>
+  
   <div class="hero__content">
     <div class="hero__badge">
       <span class="hero__badge-dot" aria-hidden="true"></span>
@@ -23,13 +29,18 @@
     </p>
     
     <div class="hero__ctas" role="group" aria-label="Call to action buttons">
-      <a routerLink="/services" class="hero__cta hero__cta--primary">
-        Explore Our Work
-        <app-icon name="arrow-right"></app-icon>
-      </a>
-      <a routerLink="/contact" class="hero__cta hero__cta--secondary">
-        Get in Touch
-      </a>
+      @for (cta of ctas; track cta.text) {
+        <button 
+          [class]="'hero__cta hero__cta--' + (cta.primary ? 'primary' : 'secondary')"
+          (click)="handleCta(cta.action)"
+          [attr.aria-label]="cta.text"
+        >
+          {{ cta.text }}
+          @if (cta.primary) {
+            <app-icon name="arrow-right"></app-icon>
+          }
+        </button>
+      }
     </div>
     
     <div class="hero__stats" role="list" aria-label="Company statistics">
