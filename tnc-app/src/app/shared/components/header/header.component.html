@@ -20,6 +20,13 @@
           {{ link.label }}
         </a>
       }
+      <a 
+        [routerLink]="contactPath" 
+        class="header__cta header__cta--mobile"
+        (click)="closeMobileMenu()"
+      >
+        Get in Touch
+      </a>
     </nav>
 
     <button 

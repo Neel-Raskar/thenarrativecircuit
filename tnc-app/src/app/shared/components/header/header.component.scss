@@ -173,8 +173,18 @@
       transform: translateY(-2px);
     }
 
+    &--mobile {
+      display: none;
+      margin-top: 1rem;
+      text-align: center;
+    }
+
     @media (max-width: 768px) {
       display: none;
+
+      &--mobile {
+        display: block;
+      }
     }
   }
 
