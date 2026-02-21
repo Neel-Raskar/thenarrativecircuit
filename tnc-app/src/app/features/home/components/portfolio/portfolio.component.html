@@ -19,7 +19,11 @@
 
     @if (loading) {
       <div class="portfolio__loading">
-        <p>Loading...</p>
+        <div class="portfolio__skeleton-grid">
+          @for (i of [1,2,3,4,5,6]; track i) {
+            <div class="portfolio__skeleton-item"></div>
+          }
+        </div>
       </div>
     } @else {
       <div class="portfolio__gallery">
@@ -29,7 +33,7 @@
             [style.animation-delay]="i * 50 + 'ms'"
             (click)="openLightbox(item)"
           >
-            <img [src]="item.image" [alt]="item.title" class="portfolio__item-image">
+            <img [src]="item.image" [alt]="item.title" class="portfolio__item-image" loading="lazy">
             <div class="portfolio__item-overlay">
               <h3 class="portfolio__item-title">{{ item.title }}</h3>
             </div>
@@ -46,7 +50,7 @@
           <div class="portfolio__clients-grid">
             @for (logo of clientLogos; track trackByIndex($index)) {
               <div class="portfolio__client">
-                <img [src]="logo.logo" [alt]="logo.name" class="portfolio__client-logo">
+                <img [src]="logo.logo" [alt]="logo.name" class="portfolio__client-logo" loading="lazy">
               </div>
             }
           </div>
