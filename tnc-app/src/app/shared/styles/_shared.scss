@@ -1,0 +1,25 @@
+// ===========================================
+// SHARED STYLES - Common page styles
+// ===========================================
+
+.page {
+  min-height: 100vh;
+  padding-top: 120px;
+  text-align: center;
+
+  &__title {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  &__subtitle {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+  }
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}

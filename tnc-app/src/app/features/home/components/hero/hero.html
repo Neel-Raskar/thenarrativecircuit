@@ -1,0 +1,44 @@
+<section class="hero" aria-label="Hero">
+  <div class="hero__background" aria-hidden="true">
+    <div class="hero__glow"></div>
+    <div class="hero__gradient"></div>
+    <div class="hero__noise"></div>
+    <div class="hero__particles">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+  </div>
+
+  <div class="hero__content">
+    <div class="hero__badge">
+      <span class="hero__badge-dot" aria-hidden="true"></span>
+      <span>{{ badgeText }}</span>
+    </div>
+    
+    <h1 class="hero__title">
+      <span class="hero__title-line">{{ tagline }}</span>
+    </h1>
+    
+    <p class="hero__subtitle">
+      <span class="hero__services">{{ subtitle }}</span>
+    </p>
+    
+    <div class="hero__ctas" role="group" aria-label="Call to action buttons">
+      <a routerLink="/services" class="hero__cta hero__cta--primary">
+        Explore Our Work
+        <app-icon name="arrow-right"></app-icon>
+      </a>
+      <a routerLink="/contact" class="hero__cta hero__cta--secondary">
+        Get in Touch
+      </a>
+    </div>
+    
+    <div class="hero__stats" role="list" aria-label="Company statistics">
+      @for (stat of stats; track stat.label) {
+        <div class="hero__stat" role="listitem">
+          <span class="hero__stat-number">{{ stat.number }}</span>
+          <span class="hero__stat-label">{{ stat.label }}</span>
+        </div>
+      }
+    </div>
+  </div>
+</section>
