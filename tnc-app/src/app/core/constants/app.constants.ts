@@ -8,8 +8,8 @@ export const HERO_CONTENT = {
   subtitle: 'Premier nightlife events curator • Artist management • Sound production • PR & Marketing',
   badgeText: 'Nightlife Events & More',
   ctas: [
-    { text: 'Explore Our Work', primary: true },
-    { text: 'Get in Touch', primary: false }
+    { text: 'Explore Our Work', primary: true, action: 'services' },
+    { text: 'Get in Touch', primary: false, action: 'contact' }
   ],
   stats: [
     { number: '150+', label: 'Events' },

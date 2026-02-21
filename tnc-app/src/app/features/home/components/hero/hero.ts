@@ -1,13 +1,13 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
-import { HERO_CONTENT } from '../../../../core/constants';
+import { Router } from '@angular/router';
+import { HERO_CONTENT, ROUTES } from '../../../../core/constants';
 import { IconComponent } from '../../../../shared/components/icon/icon.component';
 
 @Component({
   selector: 'app-hero',
   standalone: true,
-  imports: [CommonModule, RouterLink, IconComponent],
+  imports: [CommonModule, IconComponent],
   templateUrl: './hero.html',
   styleUrl: './hero.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -21,4 +21,14 @@ export class HeroComponent {
   badgeText = HERO_CONTENT.badgeText;
   ctas = HERO_CONTENT.ctas;
   stats = HERO_CONTENT.stats;
+
+  constructor(private router: Router) {}
+
+  handleCta(action: string): void {
+    if (action === 'services') {
+      this.router.navigate([ROUTES.SERVICES]);
+    } else if (action === 'contact') {
+      this.router.navigate([ROUTES.CONTACT]);
+    }
+  }
 }

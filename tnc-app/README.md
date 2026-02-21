@@ -4,7 +4,8 @@
 
 **Project Name:** The Narrative Circuit  
 **Type:** Nightlife Events & Artist Management Company Website  
-**Tech Stack:** Angular 21 (Standalone Components) + SCSS
+**Tech Stack:** Angular 21 (Standalone Components) + SCSS  
+**Status:** In Development
 
 ---
 
@@ -31,32 +32,26 @@
 
 ## Current Project State
 
-### Completed
-- ✅ Hero Section (fully styled with brand colors)
-- ✅ Design System (CSS variables in `styles.scss`)
-- ✅ Logo with split-color text
-- ✅ Tagline in #f1eae0
-- ✅ Stats section (150+ Events, 50+ Artists, 10+ Years)
-- ✅ CTA buttons (Explore Our Work, Get in Touch)
-- ✅ Animated background with particles & glow effects
+### Completed Features
+- ✅ **Hero Section** - Landing page with animated background, stats, CTA buttons
+- ✅ **Services Section** - 5 services with icons, titles, taglines, and descriptions
+- ✅ **Portfolio Section** - Gallery of events and artists with filtering
+- ✅ **Contact Section** - Contact form with validation
+- ✅ **Header Component** - Navigation with logo and menu links
+- ✅ **Not Found Page** - 404 error page
+- ✅ **Routing** - Full routing setup with lazy loading
+- ✅ **Design System** - CSS variables, typography, spacing
+- ✅ **Icon Component** - Reusable icon component
+- ✅ **CTA Buttons** - "Explore Our Work" → Services, "Get in Touch" → Contact
 
-### Files Modified
-
-**`src/styles.scss`**
-- Added brand color variables (`--brand-primary`, etc.)
-- Updated accent gradient to use cyan (#2596be)
-- Added RGBA alpha variants for brand colors
-
-**`src/app/features/home/components/hero/`**
-- `hero.ts` - Added `brandNameFirst` and `brandNameSecond` properties
-- `hero.html` - Split logo text into two spans for different colors
-- `hero.scss` - Updated all colors, added glow effect
-
-**`src/app/core/constants/app.constants.ts`**
-- Added `brandNameFirst` and `brandNameSecond` constants
-
-**`src/app/core/models/hero.model.ts`**
-- Added `brandNameFirst` and `brandNameSecond` to HeroContent interface
+### Routes
+| Path | Component | Description |
+|------|-----------|-------------|
+| `/` | HeroComponent | Landing page |
+| `/services` | ServicesComponent | Services listing |
+| `/portfolio` | PortfolioComponent | Portfolio gallery |
+| `/contact` | ContactComponent | Contact form |
+| `/**` | NotFoundComponent | 404 page |
 
 ---
 
@@ -69,56 +64,65 @@ tnc-app/
 │   │   ├── features/
 │   │   │   └── home/
 │   │   │       └── components/
-│   │   │           └── hero/          # DONE ✓
+│   │   │           ├── hero/              # Landing page
+│   │   │           ├── services/          # Services listing
+│   │   │           ├── portfolio/         # Portfolio gallery
+│   │   │           ├── contact/           # Contact form
+│   │   │           └── index.ts           # Barrel exports
 │   │   ├── core/
 │   │   │   ├── constants/
-│   │   │   │   └── app.constants.ts  # Content config
+│   │   │   │   ├── app.constants.ts       # Content config (hero, services, routes)
+│   │   │   │   └── index.ts
 │   │   │   └── models/
-│   │   │       └── hero.model.ts      # TypeScript interfaces
+│   │   │       ├── hero.model.ts          # TypeScript interfaces
+│   │   │       └── index.ts
 │   │   ├── shared/
 │   │   │   └── components/
-│   │   │       └── icon/              # Icon component (arrow-right)
-│   │   ├── app.ts                     # Root component
-│   │   ├── app.html                   # Template (just <app-hero>)
-│   │   ├── app.routes.ts              # Routes (empty for now)
-│   │   └── app.config.ts              # App configuration
-│   ├── styles.scss                    # Global design system
-│   ├── index.html                     # HTML shell with Google Fonts
-│   └── main.ts                        # Bootstrap entry
+│   │   │       ├── header/                # Navigation header
+│   │   │       ├── icon/                  # Icon component
+│   │   │       ├── not-found/            # 404 page
+│   │   │       └── index.ts
+│   │   ├── app.ts                         # Root component
+│   │   ├── app.html                      # Root template
+│   │   ├── app.routes.ts                # Routing configuration
+│   │   ├── app.config.ts                # App configuration
+│   │   └── app.scss                     # Root styles
+│   ├── styles.scss                       # Global design system
+│   ├── index.html                        # HTML shell with Google Fonts
+│   └── main.ts                           # Bootstrap entry
 ├── public/
-│   └── logo.jpg                       # Brand logo
-└── package.json
+│   ├── assets/
+│   │   ├── portfolio/                    # Portfolio images
+│   │   │   ├── artists/                  # Artist photos
+│   │   │   └── events/                   # Event photos
+│   │   └── logos/                        # Brand logos
+│   └── favicon.ico
+├── angular.json
+├── package.json
+├── tsconfig.json
+└── README.md
 ```
 
 ---
 
-## Services (Planned)
+## Services Offered
 
-The following services will be displayed in the Services section:
+The following services are displayed in the Services section:
 
 1. **Event Curation** - Planning & organizing nightlife events
 2. **Artist Management** - Managing performers & talent
 3. **Sound Production** - Audio engineering & equipment
 4. **PR & Marketing** - Promotion & brand visibility
-
----
-
-## Recommended Next Steps
-
-1. **Services Section** - Create new component at `src/app/features/home/components/services/`
-2. **Set up Routing** - Configure Angular routes in `app.routes.ts`
-3. **Navigation Header** - Add nav bar with routes
-4. **Portfolio Section** - Gallery of past events
-5. **About Section** - Company story & team
-6. **Testimonials Section** - Client reviews
-7. **Contact Section** - Contact form
-8. **Footer** - Links, social media, copyright
+5. **Influencer Collaborations** - Influencer partnerships
 
 ---
 
 ## Commands
 
 ```bash
+# Install dependencies
+npm install
+
 # Start development server
 ng serve
 # or
@@ -128,6 +132,9 @@ npm start
 ng build
 # or
 npm run build
+
+# Run tests
+ng test
 ```
 
 ---
@@ -165,4 +172,15 @@ npm run build
 
 ---
 
-*Last updated: Feb 14, 2026*
+## Key Files
+
+| File | Purpose |
+|------|---------|
+| `src/app/core/constants/app.constants.ts` | Hero content, services data, routes config |
+| `src/app/core/models/hero.model.ts` | TypeScript interfaces (StatItem, Service) |
+| `src/styles.scss` | Global design system with CSS variables |
+| `src/app/app.routes.ts` | Route definitions with lazy loading |
+
+---
+
+*Last updated: Feb 22, 2026*
