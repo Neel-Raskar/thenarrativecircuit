@@ -1,6 +1,7 @@
 import { Component, ChangeDetectionStrategy, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { BASE_HREF } from '../../../../core/constants';
 
 interface PortfolioItem {
   image: string;
@@ -39,11 +40,17 @@ export class PortfolioComponent implements OnInit {
 
   private loadManifest(): void {
     console.log('Loading manifest...');
-    this.http.get<Manifest>('/assets/portfolio/manifest.json').subscribe({
+    this.http.get<Manifest>(BASE_HREF + 'assets/portfolio/manifest.json').subscribe({
       next: (data) => {
         console.log('Manifest loaded:', data);
-        this.portfolioItems = data.images || [];
-        this.clientLogos = data.logos || [];
+        this.portfolioItems = (data.images || []).map(item => ({
+          ...item,
+          image: BASE_HREF + item.image
+        }));
+        this.clientLogos = (data.logos || []).map(logo => ({
+          ...logo,
+          logo: BASE_HREF + logo.logo
+        }));
         this.loading = false;
         this.cdr.markForCheck();
       },

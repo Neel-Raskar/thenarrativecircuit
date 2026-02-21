@@ -63,3 +63,5 @@ export const NAV_LINKS = [
   { path: ROUTES.SERVICES, label: 'Services' },
   { path: ROUTES.PORTFOLIO, label: 'Portfolio' },
 ];
+
+export const BASE_HREF = '/thenarrativecircuit/';
