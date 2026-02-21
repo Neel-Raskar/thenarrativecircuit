@@ -40,22 +40,6 @@
           </div>
         }
       </div>
-
-      @if (clientLogos.length > 0) {
-        <section class="portfolio__clients">
-          <header class="portfolio__clients-header">
-            <span class="portfolio__clients-badge">Partners</span>
-            <h2 class="portfolio__clients-title">Brands We've Worked With</h2>
-          </header>
-          <div class="portfolio__clients-grid">
-            @for (logo of clientLogos; track trackByIndex($index)) {
-              <div class="portfolio__client">
-                <img [src]="logo.logo" [alt]="logo.name" class="portfolio__client-logo" loading="lazy">
-              </div>
-            }
-          </div>
-        </section>
-      }
     }
   </div>
 

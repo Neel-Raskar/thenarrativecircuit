@@ -13,7 +13,7 @@ export const routes: Routes = [
   },
   { 
     path: 'portfolio', 
-    title: 'Portfolio | The Narrative Circuit',
+    title: 'Gallery | The Narrative Circuit',
     loadComponent: () => import('./features/home/components/portfolio/portfolio.component').then(m => m.PortfolioComponent) 
   },
   { 

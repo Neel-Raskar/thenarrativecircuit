@@ -47,5 +47,21 @@
         </div>
       }
     </div>
+
+    @if (clientLogos.length > 0) {
+      <section class="hero__clients">
+        <header class="hero__clients-header">
+          <span class="hero__clients-badge">Partners</span>
+          <h2 class="hero__clients-title">Brands We've Worked With</h2>
+        </header>
+        <div class="hero__clients-grid">
+          @for (logo of clientLogos; track $index) {
+            <div class="hero__client">
+              <img [src]="logo.logo" [alt]="logo.name" class="hero__client-logo" loading="lazy">
+            </div>
+          }
+        </div>
+      </section>
+    }
   </div>
 </section>
