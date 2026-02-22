@@ -24,7 +24,7 @@
       left: 20%;
       width: 400px;
       height: 400px;
-      background: var(--brand-primary);
+      background: var(--accent-purple);
     }
 
     &--2 {
@@ -45,7 +45,7 @@
       position: absolute;
       width: 4px;
       height: 4px;
-      background: var(--brand-primary);
+      background: var(--accent-purple);
       border-radius: 50%;
       opacity: 0.3;
       animation: particle 6s ease-in-out infinite;
@@ -86,7 +86,7 @@
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: var(--brand-primary);
+    color: var(--accent-purple);
     margin-bottom: var(--space-sm);
   }
 
@@ -99,7 +99,7 @@
     padding: 0 var(--space-sm);
 
     &-accent {
-      background: linear-gradient(135deg, var(--brand-primary) 0%, #d5a946 100%);
+      background: linear-gradient(135deg, var(--accent-purple) 0%, #d5a946 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -149,7 +149,7 @@
       inset: 0;
       border-radius: 20px;
       padding: 2px;
-      background: linear-gradient(135deg, var(--white-alpha-15) 0%, transparent 50%, var(--brand-primary-alpha-30) 100%);
+      background: linear-gradient(135deg, var(--white-alpha-15) 0%, transparent 50%, var(--accent-purple-alpha-30) 100%);
       -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
       mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
       -webkit-mask-composite: xor;
@@ -167,12 +167,12 @@
 
       .contact__card-icon {
         transform: scale(1.1);
-        background: var(--brand-primary);
+        background: var(--accent-purple);
         color: var(--bg-primary);
       }
 
       .contact__card-cta {
-        color: var(--brand-primary);
+        color: var(--accent-purple);
 
         svg {
           transform: translate(3px, -3px);
@@ -186,7 +186,7 @@
 
     &--copied {
       .contact__card-value {
-        color: var(--brand-primary);
+        color: var(--accent-purple);
       }
     }
 
@@ -197,7 +197,7 @@
       transform: translate(-50%, -50%);
       width: 150px;
       height: 150px;
-      background: radial-gradient(circle, var(--brand-primary-alpha-20) 0%, transparent 70%);
+      background: radial-gradient(circle, var(--accent-purple-alpha-20) 0%, transparent 70%);
       opacity: 0;
       transition: opacity 0.4s ease;
       pointer-events: none;

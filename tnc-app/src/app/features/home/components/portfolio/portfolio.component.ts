@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, ChangeDetectorRef, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { BASE_HREF } from '../../../../core/constants';
@@ -6,6 +6,7 @@ import { BASE_HREF } from '../../../../core/constants';
 interface PortfolioItem {
   image: string;
   title?: string;
+  category?: string;
 }
 
 interface ClientLogo {
@@ -16,6 +17,13 @@ interface ClientLogo {
 interface Manifest {
   images: PortfolioItem[];
   logos: ClientLogo[];
+}
+
+interface FloatingImage {
+  visible: boolean;
+  x: number;
+  y: number;
+  image: string;
 }
 
 @Component({
@@ -31,18 +39,35 @@ export class PortfolioComponent implements OnInit {
   clientLogos: ClientLogo[] = [];
   selectedItem: PortfolioItem | null = null;
   loading = true;
+  
+  floatingImage: FloatingImage = {
+    visible: false,
+    x: 0,
+    y: 0,
+    image: ''
+  };
+
+  isMobile = false;
 
   constructor(private http: HttpClient, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
+    this.checkMobile();
     this.loadManifest();
   }
 
+  @HostListener('window:resize')
+  onResize() {
+    this.checkMobile();
+  }
+
+  private checkMobile(): void {
+    this.isMobile = window.innerWidth < 768;
+  }
+
   private loadManifest(): void {
-    console.log('Loading manifest...');
     this.http.get<Manifest>(BASE_HREF + 'assets/portfolio/manifest.json').subscribe({
       next: (data) => {
-        console.log('Manifest loaded:', data);
         this.portfolioItems = (data.images || []).map(item => ({
           ...item,
           image: BASE_HREF + item.image
@@ -54,12 +79,36 @@ export class PortfolioComponent implements OnInit {
         this.loading = false;
         this.cdr.markForCheck();
       },
-      error: (err) => {
-        console.error('Failed to load manifest:', err);
+      error: () => {
         this.loading = false;
         this.cdr.markForCheck();
       }
     });
+  }
+
+  showFloatingImage(item: PortfolioItem, event: MouseEvent): void {
+    if (this.isMobile) return;
+    
+    this.floatingImage = {
+      visible: true,
+      x: event.clientX,
+      y: event.clientY,
+      image: item.image
+    };
+    this.cdr.markForCheck();
+  }
+
+  updateFloatingPosition(event: MouseEvent): void {
+    if (!this.floatingImage.visible || this.isMobile) return;
+    
+    this.floatingImage.x = event.clientX;
+    this.floatingImage.y = event.clientY;
+    this.cdr.markForCheck();
+  }
+
+  hideFloatingImage(): void {
+    this.floatingImage.visible = false;
+    this.cdr.markForCheck();
   }
 
   openLightbox(item: PortfolioItem): void {

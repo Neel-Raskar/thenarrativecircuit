@@ -131,7 +131,7 @@
       left: 0;
       width: 0;
       height: 2px;
-      background: var(--brand-primary);
+      background: var(--accent-purple);
       transition: all 0.2s ease;
     }
 
@@ -159,7 +159,7 @@
   &__cta {
     margin-left: auto;
     padding: 0.75rem 1.5rem;
-    background: var(--brand-primary);
+    background: var(--accent-purple);
     color: var(--bg-primary);
     font-weight: 600;
     font-size: 0.9rem;
@@ -169,7 +169,7 @@
     flex-shrink: 0;
 
     &:hover {
-      background: var(--brand-primary-light);
+      background: var(--accent-purple-light);
       transform: translateY(-2px);
     }
 
