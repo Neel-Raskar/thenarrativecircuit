@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, ChangeDetectorRef, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -22,7 +22,9 @@ interface Manifest {
   styleUrl: './hero.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeroComponent implements OnInit {
+export class HeroComponent implements OnInit, AfterViewInit, OnDestroy {
+  @ViewChild('heroVideo', { static: true }) heroVideo!: ElementRef<HTMLVideoElement>;
+  
   brandName = HERO_CONTENT.brandName;
   brandNameFirst = HERO_CONTENT.brandNameFirst;
   brandNameSecond = HERO_CONTENT.brandNameSecond;
@@ -37,6 +39,69 @@ export class HeroComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadClientLogos();
+  }
+
+  ngAfterViewInit(): void {
+    setTimeout(() => this.forcePlayVideo(), 100);
+    setTimeout(() => this.forcePlayVideo(), 500);
+    setTimeout(() => this.forcePlayVideo(), 1000);
+    setTimeout(() => this.forcePlayVideo(), 2000);
+    setTimeout(() => this.initMagneticButtons(), 100);
+  }
+
+  ngOnDestroy(): void {}
+
+  private initMagneticButtons(): void {
+    const magneticButtons = document.querySelectorAll('.magnetic');
+    magneticButtons.forEach((btn) => {
+      const element = btn as HTMLElement;
+      this.setupMagneticEffect(element);
+    });
+  }
+
+  private setupMagneticEffect(element: HTMLElement): void {
+    const strength = 0.3;
+    let boundingRect: DOMRect;
+
+    const mouseEnter = () => {
+      boundingRect = element.getBoundingClientRect();
+      element.style.willChange = 'transform';
+    };
+
+    const mouseLeave = () => {
+      element.style.transform = 'translate(0px, 0px)';
+      setTimeout(() => {
+        element.style.willChange = 'auto';
+      }, 300);
+    };
+
+    const mouseMove = (e: MouseEvent) => {
+      if (!boundingRect) return;
+      
+      const x = e.clientX - boundingRect.left - boundingRect.width / 2;
+      const y = e.clientY - boundingRect.top - boundingRect.height / 2;
+      
+      const distance = Math.sqrt(x * x + y * y);
+      const maxDistance = 100;
+      
+      if (distance < maxDistance) {
+        const pullX = x * strength;
+        const pullY = y * strength;
+        element.style.transform = `translate(${pullX}px, ${pullY}px)`;
+      }
+    };
+
+    element.addEventListener('mouseenter', mouseEnter);
+    element.addEventListener('mouseleave', mouseLeave);
+    element.addEventListener('mousemove', mouseMove);
+  }
+
+  private forcePlayVideo(): void {
+    const video = this.heroVideo?.nativeElement;
+    if (video && video.paused) {
+      video.muted = true;
+      video.play().catch(() => {});
+    }
   }
 
   private loadClientLogos(): void {
