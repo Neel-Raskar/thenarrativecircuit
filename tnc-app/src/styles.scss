@@ -13,21 +13,28 @@
   --brand-cream: #efece6;
   --brand-gold: #d5a946;
   
-  // Colors
-  --bg-primary: #0a0a0a;
-  --bg-secondary: #141414;
-  --bg-tertiary: #1f1f1f;
+  // Colors - Upgraded Palette
+  --bg-primary: #09090B;
+  --bg-secondary: #121214;
+  --bg-tertiary: #1a1a1d;
   
-  --text-primary: #ffffff;
+  --text-primary: #EAEAEA;
   --text-secondary: #a1a1aa;
-  --text-muted: #71717a;
+  --text-muted: #52525b;
   
-  --accent-primary: var(--brand-primary);
-  --accent-secondary: var(--brand-primary-light);
-  --accent-gradient: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-primary-light) 50%, #7ac4e0 100%);
-  --accent-primary-rgb: var(--brand-primary-rgb);
+  // Purple Accent System (NEW)
+  --accent-purple: #5E2BFF;
+  --accent-purple-light: #8B5CF6;
+  --accent-purple-dark: #4C1D95;
+  --accent-purple-rgb: 94, 43, 255;
   
-  // RGBA helpers
+  // Accent System
+  --accent-primary: var(--accent-purple);
+  --accent-secondary: var(--accent-purple-light);
+  --accent-gradient: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-purple-light) 50%, #a78bfa 100%);
+  --accent-primary-rgb: var(--accent-purple-rgb);
+  
+  // RGBA helpers - Brand Primary
   --accent-primary-alpha-10: rgba(var(--brand-primary-rgb), 0.1);
   --accent-primary-alpha-15: rgba(var(--brand-primary-rgb), 0.15);
   --accent-primary-alpha-20: rgba(var(--brand-primary-rgb), 0.2);
@@ -35,16 +42,44 @@
   --accent-primary-alpha-40: rgba(var(--brand-primary-rgb), 0.4);
   --accent-primary-alpha-50: rgba(var(--brand-primary-rgb), 0.5);
   
-  // White rgba helpers
-  --white-alpha-03: rgba(255, 255, 255, 0.03);
-  --white-alpha-05: rgba(255, 255, 255, 0.05);
-  --white-alpha-10: rgba(255, 255, 255, 0.1);
-  --white-alpha-15: rgba(255, 255, 255, 0.15);
-  --white-alpha-30: rgba(255, 255, 255, 0.3);
+  // RGBA helpers - Purple
+  --accent-purple-alpha-10: rgba(94, 43, 255, 0.1);
+  --accent-purple-alpha-15: rgba(94, 43, 255, 0.15);
+  --accent-purple-alpha-20: rgba(94, 43, 255, 0.2);
+  --accent-purple-alpha-30: rgba(94, 43, 255, 0.3);
+  --accent-purple-alpha-40: rgba(94, 43, 255, 0.4);
+  --accent-purple-alpha-50: rgba(94, 43, 255, 0.5);
   
-  // Typography
-  --font-display: 'Syne', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  // White rgba helpers
+  --white-alpha-03: rgba(234, 234, 234, 0.03);
+  --white-alpha-05: rgba(234, 234, 234, 0.05);
+  --white-alpha-10: rgba(234, 234, 234, 0.1);
+  --white-alpha-15: rgba(234, 234, 234, 0.15);
+  --white-alpha-30: rgba(234, 234, 234, 0.3);
+  
+  // Typography - Upgraded
+  --font-display: 'Clash Display', 'Syne', sans-serif;
+  --font-body: 'Switzer', 'Inter', sans-serif;
+  
+  // Typography Scale
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 2rem;
+  --text-4xl: 2.5rem;
+  --text-5xl: 3rem;
+  --text-6xl: 4rem;
+  --text-7xl: 5rem;
+  --text-8xl: 6rem;
+  --text-9xl: clamp(5rem, 15vw, 10rem);
+  
+  // Display Typography
+  --text-display-lg: clamp(4rem, 12vw, 10rem);
+  --text-display-md: clamp(3rem, 8vw, 6rem);
+  --text-display-sm: clamp(2rem, 5vw, 4rem);
   
   // Spacing
   --space-xs: 0.5rem;
@@ -85,13 +120,26 @@ body {
 // Typography
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
-  font-weight: 800;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
 }
 
-h1 { font-size: clamp(3rem, 10vw, 5rem); }
-h2 { font-size: clamp(2rem, 5vw, 3rem); }
+h1 { 
+  font-size: var(--text-display-md);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+
+h2 { 
+  font-size: var(--text-display-sm);
+  font-weight: 600;
+}
+
+h3 { 
+  font-size: var(--text-3xl);
+  font-weight: 600;
+}
 h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
 
 p {
@@ -150,8 +198,37 @@ button {
 
 // Selection
 ::selection {
-  background: var(--accent-primary);
-  color: var(--bg-primary);
+  background: var(--accent-purple);
+  color: #EAEAEA;
+}
+
+// Film Grain Overlay
+.film-grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  animation: grain 0.5s steps(1) infinite;
+  
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    opacity: 0.03;
+  }
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-1%, -1%); }
+  20% { transform: translate(1%, 1%); }
+  30% { transform: translate(-1%, 1%); }
+  40% { transform: translate(1%, -1%); }
+  50% { transform: translate(-1%, 0%); }
+  60% { transform: translate(1%, 0%); }
+  70% { transform: translate(0%, 1%); }
+  80% { transform: translate(0%, -1%); }
+  90% { transform: translate(1%, 1%); }
 }
 
 // Reduced Motion
@@ -194,8 +271,8 @@ button {
   left: 50%;
   transform: translateX(-50%);
   padding: 1rem 2rem;
-  background: var(--brand-primary);
-  color: var(--bg-primary);
+  background: var(--accent-purple);
+  color: #EAEAEA;
   font-weight: 600;
   text-decoration: none;
   border-radius: 0 0 4px 4px;
@@ -204,7 +281,7 @@ button {
 
   &:focus {
     top: 0;
-    outline: 2px solid var(--brand-primary-light);
+    outline: 2px solid var(--accent-purple-light);
     outline-offset: 2px;
   }
 }
